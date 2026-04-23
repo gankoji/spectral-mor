@@ -1,0 +1,40 @@
+{
+  "description": "Initial PGD native inference experiment matrix (see plans/PGD_NATIVE_INFERENCE_IMPLEMENTATION_PLAN.md §8).",
+  "runs": [
+    {
+      "run_id": "A1",
+      "layers": [17],
+      "projections": ["down_proj"],
+      "ranks": [8, 32, 128],
+      "mode": "fidelity_only",
+      "notes": "Use mor/pgd_fidelity_harness.py"
+    },
+    {
+      "run_id": "B1",
+      "layers": [17],
+      "projections": ["down_proj"],
+      "rank": 128,
+      "mode": "dense_pgd"
+    },
+    {
+      "run_id": "B2",
+      "layers": [0, 17, 34],
+      "projections": ["down_proj"],
+      "rank": 128,
+      "mode": "dense_pgd"
+    },
+    {
+      "run_id": "C1",
+      "layers": [17],
+      "projections": ["down_proj"],
+      "rank": 128,
+      "mode": "native_pgd"
+    },
+    {
+      "run_id": "D1",
+      "compare": ["B2", "C1"],
+      "mode": "benchmark",
+      "notes": "Same (model, R, layers, seq_len, device); use harness prefill/decode flags"
+    }
+  ]
+}

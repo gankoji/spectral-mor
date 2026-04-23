@@ -6,7 +6,7 @@ from __future__ import annotations
 
 import sys
 from pathlib import Path
-from typing import Iterable, List, Sequence, Set, Tuple
+from typing import Iterable, List, Optional, Sequence, Set, Tuple
 
 import numpy as np
 import torch
@@ -18,6 +18,7 @@ if str(_ROOT) not in sys.path:
 
 from pgd_enrichment import pgd_decompose
 from pgd_fidelity_harness import ATTN_PROJS, MLP_PROJS
+from pgd_linear import PGDLinear
 from pgd_weight import reconstruct_dense, spec_from_pgd_modes
 
 
@@ -83,6 +84,52 @@ def substitute_linear_weight_with_pgd(
     linear.weight.data.copy_(w_t)
 
 
+def replace_decoder_linear(
+    decoder: nn.Module,
+    layer_idx: int,
+    proj: str,
+    new_module: nn.Module,
+) -> None:
+    """Swap ``proj`` on ``decoder.layers[layer_idx]`` (attention or MLP child)."""
+    if proj in ATTN_PROJS:
+        parent = decoder.layers[layer_idx].self_attn
+    elif proj in MLP_PROJS:
+        parent = decoder.layers[layer_idx].mlp
+    else:
+        raise ValueError(f"unknown proj {proj!r}")
+    setattr(parent, proj, new_module)
+
+
+def linear_to_pgd_linear(
+    linear: nn.Linear,
+    rank: int,
+    *,
+    max_fixed_point_iters: int = 20,
+    seed: int = 42,
+) -> PGDLinear:
+    """Build a ``PGDLinear`` on the same device as ``linear`` (float32 factors, cast in forward)."""
+    device = linear.weight.device
+    w = linear.weight.detach().float().cpu().numpy()
+    if rank <= 0:
+        raise ValueError("rank must be positive")
+    r_max = min(rank, w.shape[0], w.shape[1])
+    modes, _ = pgd_decompose(
+        w,
+        num_modes=r_max,
+        max_fixed_point_iters=max_fixed_point_iters,
+        seed=seed,
+    )
+    spec = spec_from_pgd_modes(modes, dtype=np.float32)
+    u = torch.from_numpy(spec.u).float()
+    v = torch.from_numpy(spec.v).float()
+    bias_t: Optional[torch.Tensor]
+    if linear.bias is not None:
+        bias_t = linear.bias.detach().float().cpu().clone()
+    else:
+        bias_t = None
+    return PGDLinear(linear.out_features, linear.in_features, u, v, bias_t).to(device=device)
+
+
 def substitute_selected_linears(
     model: nn.Module,
     layer_indices: Sequence[int],
@@ -111,6 +158,35 @@ def substitute_selected_linears(
                 seed=seed,
             )
             done.append((li, proj, (lin.out_features, lin.in_features)))
+    return done
+
+
+def substitute_selected_linears_native(
+    model: nn.Module,
+    layer_indices: Sequence[int],
+    projections: Sequence[str],
+    rank: int,
+    *,
+    max_fixed_point_iters: int = 20,
+    seed: int = 42,
+) -> List[Tuple[int, str, Tuple[int, int]]]:
+    """Replace each selected ``nn.Linear`` with ``PGDLinear`` (factorized weights)."""
+    decoder = get_decoder_with_layers(model)
+    n_layers = len(decoder.layers)
+    done: List[Tuple[int, str, Tuple[int, int]]] = []
+    for li in layer_indices:
+        if li < 0 or li >= n_layers:
+            raise IndexError(f"layer index {li} out of range [0, {n_layers})")
+        for proj in projections:
+            lin = linear_submodule(decoder, li, proj)
+            pgd_mod = linear_to_pgd_linear(
+                lin,
+                rank,
+                max_fixed_point_iters=max_fixed_point_iters,
+                seed=seed,
+            )
+            replace_decoder_linear(decoder, li, proj, pgd_mod)
+            done.append((li, proj, (pgd_mod.out_features, pgd_mod.in_features)))
     return done
 
 
