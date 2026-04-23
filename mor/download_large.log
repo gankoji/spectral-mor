@@ -1,18 +1,0 @@
-/Users/jacbaile/slipbox-spectral-llm/.venv/lib/python3.12/site-packages/huggingface_hub/utils/_validators.py:189: UserWarning: The `resume_download` argument is deprecated and ignored in `snapshot_download`. Downloads always resume whenever possible.
-  warnings.warn(
-/Users/jacbaile/slipbox-spectral-llm/.venv/lib/python3.12/site-packages/huggingface_hub/utils/_validators.py:205: UserWarning: The `local_dir_use_symlinks` argument is deprecated and ignored in `snapshot_download`. Downloading to a local directory does not use symlinks anymore.
-  warnings.warn(
-
-=== 26B-A4B ===
-Downloading google/gemma-4-26B-A4B-it...
-Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]Fetching 2 files:  50%|█████     | 1/2 [06:53<06:53, 413.23s/it]Fetching 2 files: 100%|██████████| 2/2 [06:53<00:00, 206.61s/it]
-Downloaded to: /Users/jacbaile/.cache/huggingface/hub/models--google--gemma-4-26B-A4B-it/snapshots/7d4c97e54145f8ffd1a4dd1b4986a5015a517842
-  2 safetensor files, 51.61 GB
-
-=== 31B ===
-Downloading google/gemma-4-31B-it...
-Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]/Users/jacbaile/slipbox-spectral-llm/.venv/lib/python3.12/site-packages/huggingface_hub/file_download.py:731: UserWarning: Not enough free disk space to download the file. The expected file size is: 49784.79 MB. The target location /Users/jacbaile/.cache/huggingface/hub/models--google--gemma-4-31B-it/blobs only has 41734.61 MB free disk space.
-  warnings.warn(
-Fetching 2 files:   0%|          | 0/2 [07:30<?, ?it/s]
-Error downloading google/gemma-4-31B-it: Data processing error: File reconstruction error: Internal Writer Error: Background writer channel closed
-Failed to download 31B

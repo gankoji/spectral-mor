@@ -1,4 +1,0 @@
-
-[E4B] Downloading google/gemma-4-E4B-it...
-Fetching 6 files:   0%|          | 0/6 [00:00<?, ?it/s]/opt/homebrew/Cellar/python@3.12/3.12.13/Frameworks/Python.framework/Versions/3.12/lib/python3.12/multiprocessing/resource_tracker.py:279: UserWarning: resource_tracker: There appear to be 1 leaked semaphore objects to clean up at shutdown
-  warnings.warn('resource_tracker: There appear to be %d '
