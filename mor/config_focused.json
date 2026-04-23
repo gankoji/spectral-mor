@@ -1,0 +1,8 @@
+{
+  "models": ["E2B", "E4B", "26B-A4B"],
+  "layer_samples": "first_mid_last",
+  "projections": ["q_proj", "down_proj"],
+  "ranks": [8, 32, 64],
+  "max_iters": 20,
+  "seed": 42
+}

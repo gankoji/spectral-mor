@@ -1,0 +1,461 @@
+[
+  {
+    "layer": 0,
+    "proj_type": "q_proj",
+    "shape": [
+      2048,
+      1536
+    ],
+    "rank": 8,
+    "walltime_s": 0.33041012499597855,
+    "explained_var": 0.10444544457430793,
+    "compression_ratio": 109.71428571428571,
+    "modes_extracted": 8,
+    "spectral_entropy_init": 6.593930244445801,
+    "eff_rank_init": 730.6468505859375,
+    "eff_rank_ratio": 0.4756815433502197,
+    "initial_norm": 65.1968994140625
+  },
+  {
+    "layer": 0,
+    "proj_type": "q_proj",
+    "shape": [
+      2048,
+      1536
+    ],
+    "rank": 32,
+    "walltime_s": 0.8252303750196006,
+    "explained_var": 0.18171515615639944,
+    "compression_ratio": 27.428571428571427,
+    "modes_extracted": 32,
+    "spectral_entropy_init": 6.593930244445801,
+    "eff_rank_init": 730.6468505859375,
+    "eff_rank_ratio": 0.4756815433502197,
+    "initial_norm": 65.1968994140625
+  },
+  {
+    "layer": 0,
+    "proj_type": "q_proj",
+    "shape": [
+      2048,
+      1536
+    ],
+    "rank": 128,
+    "walltime_s": 3.347475457994733,
+    "explained_var": 0.37344779160198516,
+    "compression_ratio": 6.857142857142857,
+    "modes_extracted": 128,
+    "spectral_entropy_init": 6.593930244445801,
+    "eff_rank_init": 730.6468505859375,
+    "eff_rank_ratio": 0.4756815433502197,
+    "initial_norm": 65.1968994140625
+  },
+  {
+    "layer": 0,
+    "proj_type": "o_proj",
+    "shape": [
+      1536,
+      2048
+    ],
+    "rank": 8,
+    "walltime_s": 0.28892983301193453,
+    "explained_var": 0.09687716486330389,
+    "compression_ratio": 109.71428571428571,
+    "modes_extracted": 8,
+    "spectral_entropy_init": 6.574878692626953,
+    "eff_rank_init": 716.858642578125,
+    "eff_rank_ratio": 0.4667048454284668,
+    "initial_norm": 57.460872650146484
+  },
+  {
+    "layer": 0,
+    "proj_type": "o_proj",
+    "shape": [
+      1536,
+      2048
+    ],
+    "rank": 32,
+    "walltime_s": 0.8036402089928742,
+    "explained_var": 0.16908402091578534,
+    "compression_ratio": 27.428571428571427,
+    "modes_extracted": 32,
+    "spectral_entropy_init": 6.574878692626953,
+    "eff_rank_init": 716.858642578125,
+    "eff_rank_ratio": 0.4667048454284668,
+    "initial_norm": 57.460872650146484
+  },
+  {
+    "layer": 0,
+    "proj_type": "o_proj",
+    "shape": [
+      1536,
+      2048
+    ],
+    "rank": 128,
+    "walltime_s": 3.296968500013463,
+    "explained_var": 0.3747483799176202,
+    "compression_ratio": 6.857142857142857,
+    "modes_extracted": 128,
+    "spectral_entropy_init": 6.574878692626953,
+    "eff_rank_init": 716.858642578125,
+    "eff_rank_ratio": 0.4667048454284668,
+    "initial_norm": 57.460872650146484
+  },
+  {
+    "layer": 0,
+    "proj_type": "down_proj",
+    "shape": [
+      1536,
+      6144
+    ],
+    "rank": 8,
+    "walltime_s": 0.8172767920186743,
+    "explained_var": 0.05722324713276217,
+    "compression_ratio": 153.6,
+    "modes_extracted": 8,
+    "spectral_entropy_init": 7.0041937828063965,
+    "eff_rank_init": 1101.2418212890625,
+    "eff_rank_ratio": 0.7169543107350668,
+    "initial_norm": 88.77117919921875
+  },
+  {
+    "layer": 0,
+    "proj_type": "down_proj",
+    "shape": [
+      1536,
+      6144
+    ],
+    "rank": 32,
+    "walltime_s": 2.7488748749892693,
+    "explained_var": 0.11780460707340645,
+    "compression_ratio": 38.4,
+    "modes_extracted": 32,
+    "spectral_entropy_init": 7.0041937828063965,
+    "eff_rank_init": 1101.2418212890625,
+    "eff_rank_ratio": 0.7169543107350668,
+    "initial_norm": 88.77117919921875
+  },
+  {
+    "layer": 0,
+    "proj_type": "down_proj",
+    "shape": [
+      1536,
+      6144
+    ],
+    "rank": 128,
+    "walltime_s": 11.477217000006931,
+    "explained_var": 0.27623397915343706,
+    "compression_ratio": 9.6,
+    "modes_extracted": 128,
+    "spectral_entropy_init": 7.0041937828063965,
+    "eff_rank_init": 1101.2418212890625,
+    "eff_rank_ratio": 0.7169543107350668,
+    "initial_norm": 88.77117919921875
+  },
+  {
+    "layer": 17,
+    "proj_type": "q_proj",
+    "shape": [
+      2048,
+      1536
+    ],
+    "rank": 8,
+    "walltime_s": 0.28940791700733826,
+    "explained_var": 0.0997453313403055,
+    "compression_ratio": 109.71428571428571,
+    "modes_extracted": 8,
+    "spectral_entropy_init": 6.210203170776367,
+    "eff_rank_init": 497.8023681640625,
+    "eff_rank_ratio": 0.32409008344014484,
+    "initial_norm": 59.61003494262695
+  },
+  {
+    "layer": 17,
+    "proj_type": "q_proj",
+    "shape": [
+      2048,
+      1536
+    ],
+    "rank": 32,
+    "walltime_s": 0.7784218750020955,
+    "explained_var": 0.24115040775529595,
+    "compression_ratio": 27.428571428571427,
+    "modes_extracted": 32,
+    "spectral_entropy_init": 6.210203170776367,
+    "eff_rank_init": 497.8023681640625,
+    "eff_rank_ratio": 0.32409008344014484,
+    "initial_norm": 59.61003494262695
+  },
+  {
+    "layer": 17,
+    "proj_type": "q_proj",
+    "shape": [
+      2048,
+      1536
+    ],
+    "rank": 128,
+    "walltime_s": 3.346403667004779,
+    "explained_var": 0.5425457726244216,
+    "compression_ratio": 6.857142857142857,
+    "modes_extracted": 128,
+    "spectral_entropy_init": 6.210203170776367,
+    "eff_rank_init": 497.8023681640625,
+    "eff_rank_ratio": 0.32409008344014484,
+    "initial_norm": 59.61003494262695
+  },
+  {
+    "layer": 17,
+    "proj_type": "o_proj",
+    "shape": [
+      1536,
+      2048
+    ],
+    "rank": 8,
+    "walltime_s": 0.3036058330035303,
+    "explained_var": 0.03594887844247907,
+    "compression_ratio": 109.71428571428571,
+    "modes_extracted": 8,
+    "spectral_entropy_init": 6.738845348358154,
+    "eff_rank_init": 844.5849609375,
+    "eff_rank_ratio": 0.5498600006103516,
+    "initial_norm": 55.43333435058594
+  },
+  {
+    "layer": 17,
+    "proj_type": "o_proj",
+    "shape": [
+      1536,
+      2048
+    ],
+    "rank": 32,
+    "walltime_s": 0.7977931250061374,
+    "explained_var": 0.1090143205031322,
+    "compression_ratio": 27.428571428571427,
+    "modes_extracted": 32,
+    "spectral_entropy_init": 6.738845348358154,
+    "eff_rank_init": 844.5849609375,
+    "eff_rank_ratio": 0.5498600006103516,
+    "initial_norm": 55.43333435058594
+  },
+  {
+    "layer": 17,
+    "proj_type": "o_proj",
+    "shape": [
+      1536,
+      2048
+    ],
+    "rank": 128,
+    "walltime_s": 3.303463666990865,
+    "explained_var": 0.32775382210232606,
+    "compression_ratio": 6.857142857142857,
+    "modes_extracted": 128,
+    "spectral_entropy_init": 6.738845348358154,
+    "eff_rank_init": 844.5849609375,
+    "eff_rank_ratio": 0.5498600006103516,
+    "initial_norm": 55.43333435058594
+  },
+  {
+    "layer": 17,
+    "proj_type": "down_proj",
+    "shape": [
+      1536,
+      12288
+    ],
+    "rank": 8,
+    "walltime_s": 1.638630750006996,
+    "explained_var": 0.035887662734583325,
+    "compression_ratio": 170.66666666666666,
+    "modes_extracted": 8,
+    "spectral_entropy_init": 7.135666847229004,
+    "eff_rank_init": 1255.9742431640625,
+    "eff_rank_ratio": 0.8176915645599365,
+    "initial_norm": 110.4425048828125
+  },
+  {
+    "layer": 17,
+    "proj_type": "down_proj",
+    "shape": [
+      1536,
+      12288
+    ],
+    "rank": 32,
+    "walltime_s": 5.636541750020115,
+    "explained_var": 0.07959137536097327,
+    "compression_ratio": 42.666666666666664,
+    "modes_extracted": 32,
+    "spectral_entropy_init": 7.135666847229004,
+    "eff_rank_init": 1255.9742431640625,
+    "eff_rank_ratio": 0.8176915645599365,
+    "initial_norm": 110.4425048828125
+  },
+  {
+    "layer": 17,
+    "proj_type": "down_proj",
+    "shape": [
+      1536,
+      12288
+    ],
+    "rank": 128,
+    "walltime_s": 22.31837954101502,
+    "explained_var": 0.20155132805147413,
+    "compression_ratio": 10.666666666666666,
+    "modes_extracted": 128,
+    "spectral_entropy_init": 7.135666847229004,
+    "eff_rank_init": 1255.9742431640625,
+    "eff_rank_ratio": 0.8176915645599365,
+    "initial_norm": 110.4425048828125
+  },
+  {
+    "layer": 34,
+    "proj_type": "q_proj",
+    "shape": [
+      4096,
+      1536
+    ],
+    "rank": 8,
+    "walltime_s": 0.4964988340216223,
+    "explained_var": 0.0930724768657466,
+    "compression_ratio": 139.63636363636363,
+    "modes_extracted": 8,
+    "spectral_entropy_init": 6.314701557159424,
+    "eff_rank_init": 552.6370849609375,
+    "eff_rank_ratio": 0.35978976885477704,
+    "initial_norm": 85.84093475341797
+  },
+  {
+    "layer": 34,
+    "proj_type": "q_proj",
+    "shape": [
+      4096,
+      1536
+    ],
+    "rank": 32,
+    "walltime_s": 1.5939511670148931,
+    "explained_var": 0.219406726738835,
+    "compression_ratio": 34.90909090909091,
+    "modes_extracted": 32,
+    "spectral_entropy_init": 6.314701557159424,
+    "eff_rank_init": 552.6370849609375,
+    "eff_rank_ratio": 0.35978976885477704,
+    "initial_norm": 85.84093475341797
+  },
+  {
+    "layer": 34,
+    "proj_type": "q_proj",
+    "shape": [
+      4096,
+      1536
+    ],
+    "rank": 128,
+    "walltime_s": 6.637597249995451,
+    "explained_var": 0.507284984076265,
+    "compression_ratio": 8.727272727272727,
+    "modes_extracted": 128,
+    "spectral_entropy_init": 6.314701557159424,
+    "eff_rank_init": 552.6370849609375,
+    "eff_rank_ratio": 0.35978976885477704,
+    "initial_norm": 85.84093475341797
+  },
+  {
+    "layer": 34,
+    "proj_type": "o_proj",
+    "shape": [
+      1536,
+      4096
+    ],
+    "rank": 8,
+    "walltime_s": 0.5841585000162013,
+    "explained_var": 0.02653632271772355,
+    "compression_ratio": 139.63636363636363,
+    "modes_extracted": 8,
+    "spectral_entropy_init": 6.919582366943359,
+    "eff_rank_init": 1011.8972778320312,
+    "eff_rank_ratio": 0.6587872902552286,
+    "initial_norm": 75.7414779663086
+  },
+  {
+    "layer": 34,
+    "proj_type": "o_proj",
+    "shape": [
+      1536,
+      4096
+    ],
+    "rank": 32,
+    "walltime_s": 1.6604234999977052,
+    "explained_var": 0.08144024423869678,
+    "compression_ratio": 34.90909090909091,
+    "modes_extracted": 32,
+    "spectral_entropy_init": 6.919582366943359,
+    "eff_rank_init": 1011.8972778320312,
+    "eff_rank_ratio": 0.6587872902552286,
+    "initial_norm": 75.7414779663086
+  },
+  {
+    "layer": 34,
+    "proj_type": "o_proj",
+    "shape": [
+      1536,
+      4096
+    ],
+    "rank": 128,
+    "walltime_s": 6.886851249990286,
+    "explained_var": 0.2612680940597282,
+    "compression_ratio": 8.727272727272727,
+    "modes_extracted": 128,
+    "spectral_entropy_init": 6.919582366943359,
+    "eff_rank_init": 1011.8972778320312,
+    "eff_rank_ratio": 0.6587872902552286,
+    "initial_norm": 75.7414779663086
+  },
+  {
+    "layer": 34,
+    "proj_type": "down_proj",
+    "shape": [
+      1536,
+      12288
+    ],
+    "rank": 8,
+    "walltime_s": 1.6186753750080243,
+    "explained_var": 0.026683862287676607,
+    "compression_ratio": 170.66666666666666,
+    "modes_extracted": 8,
+    "spectral_entropy_init": 7.167018890380859,
+    "eff_rank_init": 1295.975341796875,
+    "eff_rank_ratio": 0.8437339464823405,
+    "initial_norm": 107.81524658203125
+  },
+  {
+    "layer": 34,
+    "proj_type": "down_proj",
+    "shape": [
+      1536,
+      12288
+    ],
+    "rank": 32,
+    "walltime_s": 5.563891917001456,
+    "explained_var": 0.06474460050889863,
+    "compression_ratio": 42.666666666666664,
+    "modes_extracted": 32,
+    "spectral_entropy_init": 7.167018890380859,
+    "eff_rank_init": 1295.975341796875,
+    "eff_rank_ratio": 0.8437339464823405,
+    "initial_norm": 107.81524658203125
+  },
+  {
+    "layer": 34,
+    "proj_type": "down_proj",
+    "shape": [
+      1536,
+      12288
+    ],
+    "rank": 128,
+    "walltime_s": 23.87064116698457,
+    "explained_var": 0.18973962051861737,
+    "compression_ratio": 10.666666666666666,
+    "modes_extracted": 128,
+    "spectral_entropy_init": 7.167018890380859,
+    "eff_rank_init": 1295.975341796875,
+    "eff_rank_ratio": 0.8437339464823405,
+    "initial_norm": 107.81524658203125
+  }
+]
