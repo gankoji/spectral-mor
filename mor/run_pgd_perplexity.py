@@ -26,8 +26,9 @@ from inference_eval import (
     load_model_and_tokenizer,
     load_prompts_for_eval,
     nll_metrics_many,
-    peak_cuda_memory_mb,
-    reset_cuda_peak_memory,
+    peak_accelerator_memory_mb,
+    prompt_text_for_eval,
+    reset_accelerator_peak_memory,
     resolve_device,
 )
 from pgd_hf_substitution import (
@@ -56,7 +57,12 @@ def _parse_drift_layers(s: str) -> List[int]:
 def main(argv: Optional[Sequence[str]] = None) -> int:
     p = argparse.ArgumentParser(description="PGD substitution + perplexity on snippet(s).")
     p.add_argument("--model", type=str, default="google/gemma-4-E2B-it")
-    p.add_argument("--device", type=str, default="auto")
+    p.add_argument(
+        "--device",
+        type=str,
+        default="auto",
+        help="auto | cpu | cuda | mps",
+    )
     p.add_argument(
         "--torch-dtype",
         type=str,
@@ -107,6 +113,12 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     )
     p.add_argument("--drift-prompt-index", type=int, default=0)
     p.add_argument("--output-json", type=Path, default=None)
+    p.add_argument(
+        "--apply-chat-template",
+        action=argparse.BooleanOptionalAction,
+        default=True,
+        help="Use tokenizer chat_template for -it models.",
+    )
     args = p.parse_args(list(argv) if argv is not None else None)
 
     text = args.text
@@ -151,8 +163,11 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
 
     dpi = max(0, min(args.drift_prompt_index, len(prompts) - 1))
     drift_prompt = prompts[dpi].strip() if prompts[dpi].strip() else prompts[dpi]
+    drift_text = prompt_text_for_eval(
+        tokenizer, drift_prompt, apply_chat_template=args.apply_chat_template
+    )
     enc_d = tokenizer(
-        drift_prompt,
+        drift_text,
         return_tensors="pt",
         truncation=True,
         max_length=args.max_length,
@@ -230,15 +245,20 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
                 for li in drift_layers
             }
 
-    reset_cuda_peak_memory()
+    reset_accelerator_peak_memory(dev)
 
     t2 = time.perf_counter()
     nll_block = nll_metrics_many(
-        model, tokenizer, prompts, dev, max_length=args.max_length
+        model,
+        tokenizer,
+        prompts,
+        dev,
+        max_length=args.max_length,
+        apply_chat_template=args.apply_chat_template,
     )
     fwd_s = time.perf_counter() - t2
 
-    peak_mb = peak_cuda_memory_mb()
+    peak_mb = peak_accelerator_memory_mb(dev)
 
     fp0 = nll_block["per_prompt"][0] if nll_block["per_prompt"] else {}
 
@@ -253,11 +273,12 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         "load_time_s": load_s,
         "substitution_time_s": sub_s,
         "forward_time_s": fwd_s,
-        "peak_gpu_memory_mb": peak_mb,
+        "peak_accelerator_memory_mb": peak_mb,
         "prompt_stats": nll_block,
         "hidden_state_drift": drift_report,
         "drift_layers": drift_layers,
         "drift_prompt_index": dpi,
+        "apply_chat_template": args.apply_chat_template,
         "run_environment": collect_run_environment(),
         "num_prompts": len(prompts),
     }

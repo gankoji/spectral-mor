@@ -26,8 +26,9 @@ from inference_eval import (
     load_model_and_tokenizer,
     load_prompts_for_eval,
     nll_metrics_many,
-    peak_cuda_memory_mb,
-    reset_cuda_peak_memory,
+    peak_accelerator_memory_mb,
+    prompt_text_for_eval,
+    reset_accelerator_peak_memory,
     resolve_device,
     time_forward_pass,
     time_generate,
@@ -74,6 +75,7 @@ def run_single_arm(
     decode_repeats: int,
     drift_layers: List[int],
     drift_prompt_index: int,
+    apply_chat_template: bool,
 ) -> Dict[str, Any]:
     t_load_0 = time.perf_counter()
     model, tokenizer = load_model_and_tokenizer(
@@ -94,8 +96,11 @@ def run_single_arm(
     first_prompt = prompts[0].strip() if prompts[0].strip() else prompts[0]
     dpi = max(0, min(drift_prompt_index, len(prompts) - 1))
     drift_prompt = prompts[dpi].strip() if prompts[dpi].strip() else prompts[dpi]
+    drift_text = prompt_text_for_eval(
+        tokenizer, drift_prompt, apply_chat_template=apply_chat_template
+    )
     enc_d = tokenizer(
-        drift_prompt,
+        drift_text,
         return_tensors="pt",
         truncation=True,
         max_length=max_length,
@@ -156,14 +161,22 @@ def run_single_arm(
     else:
         raise ValueError(f"unknown mode {mode!r}")
 
-    reset_cuda_peak_memory()
+    reset_accelerator_peak_memory(dev)
 
     nll_block = nll_metrics_many(
-        model, tokenizer, prompts, dev, max_length=max_length
+        model,
+        tokenizer,
+        prompts,
+        dev,
+        max_length=max_length,
+        apply_chat_template=apply_chat_template,
     )
 
+    first_tok = prompt_text_for_eval(
+        tokenizer, first_prompt, apply_chat_template=apply_chat_template
+    )
     enc = tokenizer(
-        first_prompt,
+        first_tok,
         return_tensors="pt",
         truncation=True,
         max_length=max_length,
@@ -194,19 +207,22 @@ def run_single_arm(
             max_prompt_length=max_length,
             warmup=0,
             repeats=decode_repeats,
+            apply_chat_template=apply_chat_template,
         )
         decode_s = dg_s
         decode_new_tokens = n_new
         if decode_s and decode_s > 0 and decode_new_tokens:
             decode_toks_per_s = float(decode_new_tokens) / decode_s
 
-    peak = peak_cuda_memory_mb()
+    peak = peak_accelerator_memory_mb(dev)
 
     fp0 = nll_block["per_prompt"][0] if nll_block["per_prompt"] else {}
 
     del model
     if torch.cuda.is_available():
         torch.cuda.empty_cache()
+    if dev.type == "mps":
+        torch.mps.empty_cache()
 
     out: Dict[str, Any] = {
         "mode": mode,
@@ -222,11 +238,12 @@ def run_single_arm(
         "decode_wall_s_per_run": decode_s,
         "decode_new_tokens_per_run": decode_new_tokens,
         "decode_tokens_per_s": decode_toks_per_s,
-        "peak_gpu_memory_mb": peak,
+        "peak_accelerator_memory_mb": peak,
         "prompt_stats": nll_block,
         "hidden_state_drift": drift_report,
         "drift_layers": drift_layers,
         "drift_prompt_index": dpi,
+        "apply_chat_template": apply_chat_template,
     }
     if fp0:
         out["loss_nats_per_token"] = fp0["loss_nats_per_token"]
@@ -252,7 +269,12 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         default=None,
         help="Optional path for bookkeeping (fidelity uses pgd_fidelity_harness).",
     )
-    p.add_argument("--device", type=str, default="auto")
+    p.add_argument(
+        "--device",
+        type=str,
+        default="auto",
+        help="auto | cpu | cuda | cuda:0 | mps (Apple Silicon GPU)",
+    )
     p.add_argument(
         "--torch-dtype",
         type=str,
@@ -310,6 +332,12 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         default=None,
         help="Optional path to experiment_matrix.json (included in payload metadata).",
     )
+    p.add_argument(
+        "--apply-chat-template",
+        action=argparse.BooleanOptionalAction,
+        default=True,
+        help="Wrap prompts with tokenizer chat_template (recommended for -it models).",
+    )
     args = p.parse_args(list(argv) if argv is not None else None)
 
     prompts = load_prompts_for_eval(
@@ -359,6 +387,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
                 decode_repeats=args.decode_repeats,
                 drift_layers=[] if m == "baseline" else drift_layers,
                 drift_prompt_index=args.drift_prompt_index,
+                apply_chat_template=args.apply_chat_template,
             )
         )
 
@@ -366,6 +395,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         "arms": arms,
         "prompts_resolved_count": len(prompts),
         "prompts_preview": prompts[:3],
+        "apply_chat_template": args.apply_chat_template,
         "run_environment": collect_run_environment(),
         "safetensors_path_note": str(args.safetensors_path) if args.safetensors_path else None,
         "experiment_matrix_path": str(matrix_path) if matrix_path else None,
