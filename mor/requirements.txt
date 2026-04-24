@@ -1,0 +1,5 @@
+# Pin for experiment reproducibility; relax as needed for your stack.
+numpy>=1.24,<3
+torch>=2.2,<3
+transformers>=4.40,<5
+safetensors>=0.4,<1

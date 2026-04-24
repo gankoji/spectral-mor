@@ -1,0 +1,9 @@
+The quick brown fox jumps over the lazy dog.
+In machine learning, low-rank approximations can reduce memory while preserving behavior.
+Summarize the tradeoffs between latency and accuracy for on-device language models.
+What causes activation drift when weights are perturbed in a transformer?
+Write a short paragraph explaining proper generalized decomposition for tensors.
+How do attention heads interact with feed-forward layers in a decoder block?
+Translate to French: The experiment uses a fixed random seed for reproducibility.
+List three metrics we should log when benchmarking compressed inference.
+Why might Frobenius-norm error underestimate downstream perplexity degradation?
