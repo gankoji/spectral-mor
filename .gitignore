@@ -7,3 +7,13 @@ venv/
 .env
 *.log
 .DS_Store
+
+# Terraform / OpenTofu
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+!*.tfvars.example
+crash.log
+override.tf
+*_override.tf

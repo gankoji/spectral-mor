@@ -164,6 +164,7 @@ These have **official, maintained providers** and extensive examples for GPU ins
 | **AWS** | `aws_instance` with `g5`, `g6`, `p4`, `p5` (etc.), or Launch Template + ASG | Quotas and capacity can block specific AZs; use capacity reservations for serious runs. |
 | **Google Cloud** | `google_compute_instance` with `guest_accelerator` (e.g. L4, A100) | Often need to request GPU quota in the project. |
 | **Microsoft Azure** | `azurerm_linux_virtual_machine` (or VMSS) with NC/ND/H-series SKUs | GPU SKUs are region-specific. |
+| **DigitalOcean** | `digitalocean_droplet` with a GPU size slug (e.g. `gpu-l40sx1-48gb`) and `gpu-h100x1-base` image | Official provider; this repo includes a starter stack under `infra/digitalocean/` (see its README). |
 
 **None of these automatically “run your tests”** — they provision the machine (and network, disk, IAM). You still attach bootstrap via **cloud-init** (`user_data`), a **startup script** resource, or a follow-on tool (Ansible, `remote-exec`, GitHub Actions SSH, etc.) to `git clone`, `pip install`, and invoke `compressed_inference_harness.py`.
 

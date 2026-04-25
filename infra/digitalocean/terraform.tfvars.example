@@ -1,0 +1,27 @@
+# Copy to terraform.tfvars (gitignored) and edit.
+# export DIGITALOCEAN_TOKEN=...   # or use doctl auth init
+
+region              = "nyc1"
+droplet_name        = "spectral-mor-gpu-experiments"
+droplet_size_slug   = "gpu-l40sx1-48gb"
+image_slug          = "gpu-h100x1-base"
+
+# Fingerprints or numeric IDs from: doctl compute ssh-key list
+ssh_keys = [
+  "aa:bb:cc:dd:ee:ff:00:11:22:33:44:55:66:77:88:99",
+]
+
+# Your public IP /32 (or office/VPN CIDR). Avoid 0.0.0.0/0 on the public internet.
+admin_ssh_cidrs = [
+  "203.0.113.50/32",
+]
+
+tags = ["spectral-mor", "gpu-experiments"]
+
+# Optional first-boot bootstrap (multiline string). Example:
+# user_data = <<-EOT
+# #cloud-config
+# package_update: true
+# packages: [git, python3-venv, python3-pip]
+# EOT
+user_data = ""
