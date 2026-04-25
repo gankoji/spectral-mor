@@ -148,3 +148,33 @@ Then repeat with `--mode dense_pgd` / `native_pgd`, `--layers 17`, `--projection
 | `mor/run_pgd_perplexity.py` | Lighter single-driver alternative. |
 
 This runbook intentionally does **not** prescribe a single cloud vendor; pick one GPU SKU that satisfies the VRAM + RAM rows above, then follow the same commands.
+
+---
+
+## OpenTofu (or Terraform) — provision GPU VMs without clicking
+
+OpenTofu speaks the same provider protocol as Terraform: use `required_providers` and the [OpenTofu Registry](https://search.opentofu.org/providers) (or HashiCorp’s registry) as usual.
+
+### Where IaC is “boring and well supported” (recommended)
+
+These have **official, maintained providers** and extensive examples for GPU instances:
+
+| Provider | Typical approach | Notes |
+|----------|------------------|--------|
+| **AWS** | `aws_instance` with `g5`, `g6`, `p4`, `p5` (etc.), or Launch Template + ASG | Quotas and capacity can block specific AZs; use capacity reservations for serious runs. |
+| **Google Cloud** | `google_compute_instance` with `guest_accelerator` (e.g. L4, A100) | Often need to request GPU quota in the project. |
+| **Microsoft Azure** | `azurerm_linux_virtual_machine` (or VMSS) with NC/ND/H-series SKUs | GPU SKUs are region-specific. |
+
+**None of these automatically “run your tests”** — they provision the machine (and network, disk, IAM). You still attach bootstrap via **cloud-init** (`user_data`), a **startup script** resource, or a follow-on tool (Ansible, `remote-exec`, GitHub Actions SSH, etc.) to `git clone`, `pip install`, and invoke `compressed_inference_harness.py`.
+
+### GPU-focused clouds (possible, often community providers)
+
+Some GPU-only vendors have **third-party Terraform/OpenTofu providers** (e.g. community providers for **Lambda Labs**). Those can work with OpenTofu but vary in freshness and coverage — treat as “evaluate before betting the farm.” Always check the provider’s registry page and last commit date.
+
+### Practical pattern
+
+1. **Tofu**: VPC/subnet (if needed), security group (SSH from your IP), key pair, GPU instance, disk size, optional public IP.  
+2. **cloud-init**: install NVIDIA driver stack *or* start from a **GPU-optimized image** the cloud publishes (simpler).  
+3. **One script**: clone repo, venv, `pip install torch` (CUDA wheel matching the image), `pip install -r mor/requirements.txt`, `huggingface-cli login`, run harness, write JSON to object storage or `scp` down.
+
+That keeps **infrastructure** declarative while **workload bootstrap** stays a small, versioned shell script next to your `.tf` / `.tofu` files.
