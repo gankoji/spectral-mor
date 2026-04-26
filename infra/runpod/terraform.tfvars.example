@@ -1,0 +1,32 @@
+# Copy to terraform.tfvars (gitignored) and edit after creating a Runpod account.
+# Prefer environment variables for secrets:
+#   export TF_VAR_runpod_api_key="rpa_..."
+#   export TF_VAR_hf_token="hf_..."   # if the Gemma model requires auth
+
+pod_name = "spectral-mor-gpu-experiments"
+
+# Runpod GPU type display IDs. The API will pick an available matching Pod.
+gpu_type_ids = [
+  "NVIDIA RTX 6000 Ada Generation",
+  "NVIDIA L40S",
+  "NVIDIA GeForce RTX 4090",
+  "NVIDIA A100 80GB PCIe",
+]
+
+gpu_count         = 1
+gpu_type_priority = "availability"
+cloud_type        = "SECURE"
+
+image_name        = "runpod/pytorch:2.4.0-py3.11-cuda12.4.1-devel-ubuntu22.04"
+container_disk_gb = 80
+volume_gb         = 80
+volume_mount_path = "/workspace"
+min_vcpu_per_gpu = 8
+min_ram_per_gpu  = 48
+ports            = ["22/tcp", "8888/http"]
+
+repo_url    = "https://github.com/gankoji/spectral-mor.git"
+repo_branch = "main"
+
+# Keep false for first provisioning. Set true when you want first boot to run jobs.
+run_jobs = false
