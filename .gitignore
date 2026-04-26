@@ -15,5 +15,7 @@ venv/
 *.tfvars
 !*.tfvars.example
 crash.log
+runpod-pod-id.txt
+runpod-create-response.json
 override.tf
 *_override.tf

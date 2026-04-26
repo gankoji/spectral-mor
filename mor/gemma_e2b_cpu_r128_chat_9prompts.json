@@ -1,0 +1,367 @@
+{
+  "arms": [
+    {
+      "mode": "baseline",
+      "model": "google/gemma-4-E2B-it",
+      "substituted": [],
+      "rank": 0,
+      "layers": [],
+      "projections": [],
+      "load_time_s": 5.1147520410013385,
+      "substitution_time_s": 0.0,
+      "prefill_mean_s": 10.036080749508983,
+      "prefill_std_s": 1.8279531664957176,
+      "decode_wall_s_per_run": null,
+      "decode_new_tokens_per_run": null,
+      "decode_tokens_per_s": null,
+      "peak_accelerator_memory_mb": null,
+      "prompt_stats": {
+        "per_prompt": [
+          {
+            "prompt_index": 0,
+            "loss_nats_per_token": 5.222188949584961,
+            "perplexity": 185.33944702148438,
+            "num_tokens": 19,
+            "max_length": 256
+          },
+          {
+            "prompt_index": 1,
+            "loss_nats_per_token": 8.331132888793945,
+            "perplexity": 4151.11767578125,
+            "num_tokens": 24,
+            "max_length": 256
+          },
+          {
+            "prompt_index": 2,
+            "loss_nats_per_token": 7.59568977355957,
+            "perplexity": 1989.601806640625,
+            "num_tokens": 24,
+            "max_length": 256
+          },
+          {
+            "prompt_index": 3,
+            "loss_nats_per_token": 9.4841947555542,
+            "perplexity": 13150.2333984375,
+            "num_tokens": 21,
+            "max_length": 256
+          },
+          {
+            "prompt_index": 4,
+            "loss_nats_per_token": 9.77270221710205,
+            "perplexity": 17548.12109375,
+            "num_tokens": 20,
+            "max_length": 256
+          },
+          {
+            "prompt_index": 5,
+            "loss_nats_per_token": 6.73811674118042,
+            "perplexity": 843.9698486328125,
+            "num_tokens": 24,
+            "max_length": 256
+          },
+          {
+            "prompt_index": 6,
+            "loss_nats_per_token": 7.9437575340271,
+            "perplexity": 2817.92919921875,
+            "num_tokens": 23,
+            "max_length": 256
+          },
+          {
+            "prompt_index": 7,
+            "loss_nats_per_token": 12.139561653137207,
+            "perplexity": 187130.53125,
+            "num_tokens": 20,
+            "max_length": 256
+          },
+          {
+            "prompt_index": 8,
+            "loss_nats_per_token": 10.27589225769043,
+            "perplexity": 29024.404296875,
+            "num_tokens": 21,
+            "max_length": 256
+          }
+        ],
+        "num_prompts_evaluated": 9,
+        "loss_mean": 8.61147075229221,
+        "loss_std_sample": 2.057934574349191,
+        "loss_min": 5.222188949584961,
+        "loss_max": 12.139561653137207,
+        "perplexity_mean": 28537.916446261937,
+        "perplexity_std_sample": 60250.809684705215,
+        "perplexity_min": 185.33944702148438,
+        "perplexity_max": 187130.53125
+      },
+      "hidden_state_drift": null,
+      "drift_layers": [],
+      "drift_prompt_index": 0,
+      "apply_chat_template": true,
+      "loss_nats_per_token": 5.222188949584961,
+      "perplexity": 185.33944702148438,
+      "num_tokens": 19
+    },
+    {
+      "mode": "dense_pgd",
+      "model": "google/gemma-4-E2B-it",
+      "substituted": [
+        {
+          "layer": 17,
+          "proj": "down_proj",
+          "shape": [
+            1536,
+            12288
+          ]
+        }
+      ],
+      "rank": 128,
+      "layers": [
+        17
+      ],
+      "projections": [
+        "down_proj"
+      ],
+      "load_time_s": 3.535178625010303,
+      "substitution_time_s": 28.942849625003873,
+      "prefill_mean_s": 10.325127708507353,
+      "prefill_std_s": 0.6864028334966861,
+      "decode_wall_s_per_run": null,
+      "decode_new_tokens_per_run": null,
+      "decode_tokens_per_s": null,
+      "peak_accelerator_memory_mb": null,
+      "prompt_stats": {
+        "per_prompt": [
+          {
+            "prompt_index": 0,
+            "loss_nats_per_token": 5.661997318267822,
+            "perplexity": 287.7227478027344,
+            "num_tokens": 19,
+            "max_length": 256
+          },
+          {
+            "prompt_index": 1,
+            "loss_nats_per_token": 8.416945457458496,
+            "perplexity": 4523.06640625,
+            "num_tokens": 24,
+            "max_length": 256
+          },
+          {
+            "prompt_index": 2,
+            "loss_nats_per_token": 7.858041286468506,
+            "perplexity": 2586.44921875,
+            "num_tokens": 24,
+            "max_length": 256
+          },
+          {
+            "prompt_index": 3,
+            "loss_nats_per_token": 9.579720497131348,
+            "perplexity": 14468.375,
+            "num_tokens": 21,
+            "max_length": 256
+          },
+          {
+            "prompt_index": 4,
+            "loss_nats_per_token": 9.70843505859375,
+            "perplexity": 16455.830078125,
+            "num_tokens": 20,
+            "max_length": 256
+          },
+          {
+            "prompt_index": 5,
+            "loss_nats_per_token": 6.870511054992676,
+            "perplexity": 963.4407958984375,
+            "num_tokens": 24,
+            "max_length": 256
+          },
+          {
+            "prompt_index": 6,
+            "loss_nats_per_token": 8.078038215637207,
+            "perplexity": 3222.904296875,
+            "num_tokens": 23,
+            "max_length": 256
+          },
+          {
+            "prompt_index": 7,
+            "loss_nats_per_token": 12.572216033935547,
+            "perplexity": 288432.40625,
+            "num_tokens": 20,
+            "max_length": 256
+          },
+          {
+            "prompt_index": 8,
+            "loss_nats_per_token": 10.651421546936035,
+            "perplexity": 42252.6171875,
+            "num_tokens": 21,
+            "max_length": 256
+          }
+        ],
+        "num_prompts_evaluated": 9,
+        "loss_mean": 8.821925163269043,
+        "loss_std_sample": 2.0679549585131434,
+        "loss_min": 5.661997318267822,
+        "loss_max": 12.572216033935547,
+        "perplexity_mean": 41465.86799791124,
+        "perplexity_std_sample": 93556.43145824313,
+        "perplexity_min": 287.7227478027344,
+        "perplexity_max": 288432.40625
+      },
+      "hidden_state_drift": {
+        "17": {
+          "relative_l2": 0.39516982436180115,
+          "cosine_mean": 0.9223667979240417,
+          "ref_rms": 1.8582216501235962,
+          "mod_rms": 1.8490837812423706,
+          "ref_hidden_norm_max": 86.70082092285156,
+          "mod_hidden_norm_max": 87.5185775756836
+        }
+      },
+      "drift_layers": [
+        17
+      ],
+      "drift_prompt_index": 0,
+      "apply_chat_template": true,
+      "loss_nats_per_token": 5.661997318267822,
+      "perplexity": 287.7227478027344,
+      "num_tokens": 19
+    },
+    {
+      "mode": "native_pgd",
+      "model": "google/gemma-4-E2B-it",
+      "substituted": [
+        {
+          "layer": 17,
+          "proj": "down_proj",
+          "shape": [
+            1536,
+            12288
+          ]
+        }
+      ],
+      "rank": 128,
+      "layers": [
+        17
+      ],
+      "projections": [
+        "down_proj"
+      ],
+      "load_time_s": 2.935626541991951,
+      "substitution_time_s": 29.477615417010384,
+      "prefill_mean_s": 9.683410229503352,
+      "prefill_std_s": 0.3291096454995568,
+      "decode_wall_s_per_run": null,
+      "decode_new_tokens_per_run": null,
+      "decode_tokens_per_s": null,
+      "peak_accelerator_memory_mb": null,
+      "prompt_stats": {
+        "per_prompt": [
+          {
+            "prompt_index": 0,
+            "loss_nats_per_token": 5.6866455078125,
+            "perplexity": 294.9027099609375,
+            "num_tokens": 19,
+            "max_length": 256
+          },
+          {
+            "prompt_index": 1,
+            "loss_nats_per_token": 8.401333808898926,
+            "perplexity": 4453.00244140625,
+            "num_tokens": 24,
+            "max_length": 256
+          },
+          {
+            "prompt_index": 2,
+            "loss_nats_per_token": 7.848616123199463,
+            "perplexity": 2562.18603515625,
+            "num_tokens": 24,
+            "max_length": 256
+          },
+          {
+            "prompt_index": 3,
+            "loss_nats_per_token": 9.556831359863281,
+            "perplexity": 14140.9677734375,
+            "num_tokens": 21,
+            "max_length": 256
+          },
+          {
+            "prompt_index": 4,
+            "loss_nats_per_token": 9.72460651397705,
+            "perplexity": 16724.107421875,
+            "num_tokens": 20,
+            "max_length": 256
+          },
+          {
+            "prompt_index": 5,
+            "loss_nats_per_token": 6.877773284912109,
+            "perplexity": 970.4630126953125,
+            "num_tokens": 24,
+            "max_length": 256
+          },
+          {
+            "prompt_index": 6,
+            "loss_nats_per_token": 8.103336334228516,
+            "perplexity": 3305.47802734375,
+            "num_tokens": 23,
+            "max_length": 256
+          },
+          {
+            "prompt_index": 7,
+            "loss_nats_per_token": 12.584163665771484,
+            "perplexity": 291899.15625,
+            "num_tokens": 20,
+            "max_length": 256
+          },
+          {
+            "prompt_index": 8,
+            "loss_nats_per_token": 10.62225341796875,
+            "perplexity": 41037.984375,
+            "num_tokens": 21,
+            "max_length": 256
+          }
+        ],
+        "num_prompts_evaluated": 9,
+        "loss_mean": 8.822840001848009,
+        "loss_std_sample": 2.0615781608041295,
+        "loss_min": 5.6866455078125,
+        "loss_max": 12.584163665771484,
+        "perplexity_mean": 41709.805338541664,
+        "perplexity_std_sample": 94703.40183060984,
+        "perplexity_min": 294.9027099609375,
+        "perplexity_max": 291899.15625
+      },
+      "hidden_state_drift": {
+        "17": {
+          "relative_l2": 0.39509353041648865,
+          "cosine_mean": 0.9223676919937134,
+          "ref_rms": 1.8582216501235962,
+          "mod_rms": 1.8485902547836304,
+          "ref_hidden_norm_max": 86.70082092285156,
+          "mod_hidden_norm_max": 87.51056671142578
+        }
+      },
+      "drift_layers": [
+        17
+      ],
+      "drift_prompt_index": 0,
+      "apply_chat_template": true,
+      "loss_nats_per_token": 5.6866455078125,
+      "perplexity": 294.9027099609375,
+      "num_tokens": 19
+    }
+  ],
+  "prompts_resolved_count": 9,
+  "prompts_preview": [
+    "The quick brown fox jumps over the lazy dog.",
+    "In machine learning, low-rank approximations can reduce memory while preserving behavior.",
+    "Summarize the tradeoffs between latency and accuracy for on-device language models."
+  ],
+  "apply_chat_template": true,
+  "run_environment": {
+    "python": "3.14.3",
+    "platform": "macOS-26.4.1-arm64-arm-64bit-Mach-O",
+    "torch": "2.11.0",
+    "cuda_available": false,
+    "mps_available": true,
+    "transformers": "5.6.2",
+    "safetensors": "0.7.0"
+  },
+  "safetensors_path_note": null,
+  "experiment_matrix_path": "/Users/jacbaile/Workspace/ventures/ai/spectral-mor/mor/experiment_matrix.json"
+}

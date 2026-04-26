@@ -1,0 +1,121 @@
+{
+  "arms": [
+    {
+      "mode": "baseline",
+      "model": "google/gemma-4-E2B-it",
+      "substituted": [],
+      "rank": 0,
+      "layers": [],
+      "projections": [],
+      "load_time_s": 237.9096178329928,
+      "substitution_time_s": 0.0,
+      "prefill_mean_s": 133.41924779149122,
+      "prefill_std_s": 35.21729899950151,
+      "decode_wall_s_per_run": null,
+      "decode_new_tokens_per_run": null,
+      "decode_tokens_per_s": null,
+      "peak_accelerator_memory_mb": 10843.09375,
+      "prompt_stats": {
+        "per_prompt": [
+          {
+            "prompt_index": 0,
+            "loss_nats_per_token": 5.197391510009766,
+            "perplexity": 180.80001831054688,
+            "num_tokens": 19,
+            "max_length": 256
+          },
+          {
+            "prompt_index": 1,
+            "loss_nats_per_token": 8.323378562927246,
+            "perplexity": 4119.05322265625,
+            "num_tokens": 24,
+            "max_length": 256
+          },
+          {
+            "prompt_index": 2,
+            "loss_nats_per_token": 7.610281467437744,
+            "perplexity": 2018.8463134765625,
+            "num_tokens": 24,
+            "max_length": 256
+          },
+          {
+            "prompt_index": 3,
+            "loss_nats_per_token": 9.482316017150879,
+            "perplexity": 13125.55078125,
+            "num_tokens": 21,
+            "max_length": 256
+          },
+          {
+            "prompt_index": 4,
+            "loss_nats_per_token": 9.744152069091797,
+            "perplexity": 17054.205078125,
+            "num_tokens": 20,
+            "max_length": 256
+          },
+          {
+            "prompt_index": 5,
+            "loss_nats_per_token": 6.73765230178833,
+            "perplexity": 843.5779418945312,
+            "num_tokens": 24,
+            "max_length": 256
+          },
+          {
+            "prompt_index": 6,
+            "loss_nats_per_token": 7.9167160987854,
+            "perplexity": 2742.749267578125,
+            "num_tokens": 23,
+            "max_length": 256
+          },
+          {
+            "prompt_index": 7,
+            "loss_nats_per_token": 12.139274597167969,
+            "perplexity": 187076.8125,
+            "num_tokens": 20,
+            "max_length": 256
+          },
+          {
+            "prompt_index": 8,
+            "loss_nats_per_token": 10.293444633483887,
+            "perplexity": 29538.34765625,
+            "num_tokens": 21,
+            "max_length": 256
+          }
+        ],
+        "num_prompts_evaluated": 9,
+        "loss_mean": 8.604956361982557,
+        "loss_std_sample": 2.063085868015354,
+        "loss_min": 5.197391510009766,
+        "loss_max": 12.139274597167969,
+        "perplexity_mean": 28522.215864393445,
+        "perplexity_std_sample": 60250.55175791757,
+        "perplexity_min": 180.80001831054688,
+        "perplexity_max": 187076.8125
+      },
+      "hidden_state_drift": null,
+      "drift_layers": [],
+      "drift_prompt_index": 0,
+      "apply_chat_template": true,
+      "loss_nats_per_token": 5.197391510009766,
+      "perplexity": 180.80001831054688,
+      "num_tokens": 19
+    }
+  ],
+  "prompts_resolved_count": 9,
+  "prompts_preview": [
+    "The quick brown fox jumps over the lazy dog.",
+    "In machine learning, low-rank approximations can reduce memory while preserving behavior.",
+    "Summarize the tradeoffs between latency and accuracy for on-device language models."
+  ],
+  "apply_chat_template": true,
+  "run_environment": {
+    "python": "3.14.3",
+    "platform": "macOS-26.4.1-arm64-arm-64bit-Mach-O",
+    "torch": "2.11.0",
+    "cuda_available": false,
+    "mps_available": true,
+    "transformers": "5.6.2",
+    "safetensors": "0.7.0"
+  },
+  "safetensors_path_note": null,
+  "experiment_matrix_path": "/Users/jacbaile/Workspace/ventures/ai/spectral-mor/mor/experiment_matrix.json"
+}
