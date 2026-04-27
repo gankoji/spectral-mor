@@ -93,6 +93,7 @@ prepare_python() {
   python -m pip install -U pip wheel setuptools
   python -m pip install torch torchvision torchaudio --index-url "$TORCH_CUDA_INDEX_URL"
   python -m pip install -r mor/requirements.txt accelerate
+  python -m pip install -U transformers huggingface-hub
 
   if [ -n "${HF_TOKEN:-}" ]; then
     python -m pip install -U huggingface_hub
